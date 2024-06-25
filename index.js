@@ -127,7 +127,7 @@ function combineScreenshotsIntoVideo(shotsDirectory, videoDirectory) {
   // Combine screenshots into video using ffmpeg
   console.log("Combining using ffmpeg");
   exec(
-    `ffmpeg -y -framerate 25 -pattern_type glob -i "${shotsDirectory}/*.jpeg" -c:v libx264 -r 25 -pix_fmt yuv420p ${videoDirectory}`,
+    `ffmpeg -y -framerate 25 -pattern_type glob -i "${shotsDirectory}/*.jpeg" -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -r 25 -pix_fmt yuv1080p ${videoDirectory}`,
     (error, stdout, stderr) => {
     deleteDirectory(shotsDirectory);
       if (error) {
